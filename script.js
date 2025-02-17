@@ -20,17 +20,26 @@ async function predictCode() {
     predictButton.disabled = true;
 
     try {
-        const response = await fetch('https://9349-34-66-43-152.ngrok-free.app/predict', { // <-- Update this URL
+        console.log("Sending request to backend...");
+        const response = await fetch('https://5ee8-34-66-43-152.ngrok-free.app/predict', { // Update this URL
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: codeSnippet })
         });
+
+        console.log("Response received. Status:", response.status);
 
         if (!response.ok) {
             throw new Error(`HTTP error! Status: ${response.status}`);
         }
 
         const data = await response.json();
+        console.log("Parsed response data:", data);
+
+        if (data.error) {
+            throw new Error(data.error);
+        }
+
         const { result, confidence, explanations, features } = data;
 
         resultText.innerText = result;
@@ -68,7 +77,7 @@ async function predictCode() {
 
     } catch (error) {
         console.error('Error:', error);
-        errorMessage.innerText = 'Error during analysis. Please try again.';
+        errorMessage.innerText = `Error during analysis: ${error.message}. Please check the console for more details.`;
         errorDisplay.style.display = 'block';
     } finally {
         buttonText.style.display = 'inline-block';
