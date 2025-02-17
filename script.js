@@ -1,3 +1,17 @@
+async function testCORS() {
+    try {
+        const response = await fetch('https://e5be-34-66-43-152.ngrok-free.app/test', {
+            method: 'GET',
+            mode: 'cors',
+            headers: {'Origin': 'https://whitehatgarun.github.io'}
+        });
+        const data = await response.json();
+        console.log('CORS test result:', data);
+    } catch (error) {
+        console.error('CORS test error:', error);
+    }
+}
+
 async function predictCode() {
     const codeSnippet = document.getElementById('codeSnippet').value;
     const predictionSection = document.getElementById('predictionSection');
@@ -22,18 +36,21 @@ async function predictCode() {
     try {
         console.log("Sending request to backend...");
         const response = await fetch('https://e5be-34-66-43-152.ngrok-free.app/predict', {
-    method: 'POST',
-    mode: 'cors',
-    credentials: 'include',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ code: codeSnippet })
-});
-
+            method: 'POST',
+            mode: 'cors',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Origin': 'https://whitehatgarun.github.io'
+            },
+            body: JSON.stringify({ code: codeSnippet })
+        });
 
         console.log("Response received. Status:", response.status);
+        console.log("Response headers:", response.headers);
 
         if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
+            const errorText = await response.text();
+            throw new Error(`HTTP error! Status: ${response.status}, Body: ${errorText}`);
         }
 
         const data = await response.json();
@@ -79,7 +96,8 @@ async function predictCode() {
         predictionSection.style.display = 'block';
 
     } catch (error) {
-        console.error('Error:', error);
+        console.error('Detailed error:', error);
+        console.error('Error stack:', error.stack);
         errorMessage.innerText = `Error during analysis: ${error.message}. Please check the console for more details.`;
         errorDisplay.style.display = 'block';
     } finally {
@@ -90,3 +108,6 @@ async function predictCode() {
 }
 
 let featureChart;
+
+// Call the CORS test function when the page loads
+window.onload = testCORS;
