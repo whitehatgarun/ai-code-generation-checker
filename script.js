@@ -11,18 +11,16 @@ async function predictCode() {
     const featureChartCanvas = document.getElementById('featureChart');
     const errorMessage = document.getElementById('errorMessage');
 
-    // Reset UI
     predictionSection.style.display = 'none';
     errorDisplay.style.display = 'none';
     explanationList.innerHTML = '';
 
-    // Loading state
     buttonText.style.display = 'none';
     loadingSpinner.style.display = 'inline-block';
     predictButton.disabled = true;
 
     try {
-        const response = await fetch('https://7bd6-34-66-43-152.ngrok-free.app/predict', {
+        const response = await fetch('https://7bd6-34-66-43-152.ngrok-free.app/predict', { // <-- Update this URL
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: codeSnippet })
@@ -35,20 +33,17 @@ async function predictCode() {
         const data = await response.json();
         const { result, confidence, explanations, features } = data;
 
-        // Display Results
         resultText.innerText = result;
         confidenceValue.innerText = confidence.toFixed(2);
 
-        // Display Explanations
         explanations.forEach(explanation => {
             const li = document.createElement('li');
             li.textContent = explanation;
             explanationList.appendChild(li);
         });
 
-        // Create Feature Chart
         if (featureChart) {
-            featureChart.destroy(); // Destroy existing chart
+            featureChart.destroy();
         }
         featureChart = new Chart(featureChartCanvas.getContext('2d'), {
             type: 'bar',
@@ -82,4 +77,4 @@ async function predictCode() {
     }
 }
 
-let featureChart;  // Global variable to hold the chart instance
+let featureChart;
