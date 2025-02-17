@@ -21,11 +21,14 @@ async function predictCode() {
 
     try {
         console.log("Sending request to backend...");
-        const response = await fetch('https://a610-34-66-43-152.ngrok-free.app/predict', { // Update this URL
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code: codeSnippet })
-        });
+        const response = await fetch('YOUR_NGROK_URL/predict', {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ code: codeSnippet })
+});
+
 
         console.log("Response received. Status:", response.status);
 
