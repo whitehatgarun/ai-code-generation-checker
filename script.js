@@ -21,7 +21,7 @@ async function predictCode() {
 
     try {
         console.log("Sending request to backend...");
-        const response = await fetch('https://5ee8-34-66-43-152.ngrok-free.app/predict', { // Update this URL
+        const response = await fetch('https://d26f-34-66-43-152.ngrok-free.app/predict', { // Update this URL
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: codeSnippet })
