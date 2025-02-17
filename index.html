@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Code Detective</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" integrity="sha512-9usAa10IRO0HhonpyAIVpjrylPvoDwiPUiKdWk5t3PyolY1cOd4DSE0Ga+ri4AuTroPR5aQvXU9xC6qOPnzFeg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>  <!-- Include Chart.js -->
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>AI Code Detective</h1>
+            <p>Uncover the origin of your code with confidence.</p>
+        </header>
+        <main>
+            <section class="input-section">
+                <textarea id="codeSnippet" placeholder="Enter code snippet here"></textarea>
+                <button id="predictButton" onclick="predictCode()" aria-label="Analyze Code">
+                    <span id="buttonText">Analyze</span>
+                    <span id="loadingSpinner" class="spinner" style="display:none;">
+                        <i class="fas fa-spinner fa-spin"></i>
+                    </span>
+                </button>
+            </section>
+            <section id="predictionSection" class="prediction-section" style="display:none;">
+                <h2>Analysis Results</h2>
+                <div class="result-summary">
+                    <p id="predictionResult">Prediction: <span id="resultText"></span></p>
+                    <p id="confidenceLevel">Confidence: <span id="confidenceValue"></span>%</p>
+                </div>
+                <div class="explanation-section">
+                    <h3>Why this prediction?</h3>
+                    <ul id="explanationList">
+                        <!-- Explanations dynamically added here -->
+                    </ul>
+                </div>
+                <div class="feature-analysis">
+                    <h3>Code Characteristics</h3>
+                    <canvas id="featureChart"></canvas>
+                </div>
+            </section>
+            <section id="errorDisplay" class="error-section" role="alert" aria-live="assertive" style="display:none;">
+                <p id="errorMessage"></p>
+            </section>
+        </main>
+        <footer>
+            <p>&copy; 2025 AI Code Detective. All rights reserved.</p>
+        </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
