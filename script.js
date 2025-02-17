@@ -1,9 +1,12 @@
 async function testCORS() {
     try {
-        const response = await fetch('https://915b-34-66-43-152.ngrok-free.app/test', {
+        const response = await fetch('https://caa8-34-106-209-198.ngrok-free.app/test', {
             method: 'GET',
             mode: 'cors',
-            headers: {'Origin': 'https://whitehatgarun.github.io'}
+            headers: {
+                'Origin': 'https://whitehatgarun.github.io',
+                'ngrok-skip-browser-warning': 'true'
+            }
         });
         const data = await response.json();
         console.log('CORS test result:', data);
@@ -35,12 +38,13 @@ async function predictCode() {
 
     try {
         console.log("Sending request to backend...");
-        const response = await fetch('https://915b-34-66-43-152.ngrok-free.app/predict', {
+        const response = await fetch('https://caa8-34-106-209-198.ngrok-free.app/predict', {
             method: 'POST',
             mode: 'cors',
             headers: { 
                 'Content-Type': 'application/json',
-                'Origin': 'https://whitehatgarun.github.io'
+                'Origin': 'https://whitehatgarun.github.io',
+                'ngrok-skip-browser-warning': 'true'
             },
             body: JSON.stringify({ code: codeSnippet })
         });
