@@ -35,7 +35,7 @@ async function predictCode() {
 
     try {
         console.log("Sending request to backend...");
-        const response = await fetch('https://e5be-34-66-43-152.ngrok-free.app/predict', {
+        const response = await fetch('https://dbdc-34-66-43-152.ngrok-free.app/predict', {
             method: 'POST',
             mode: 'cors',
             headers: { 
