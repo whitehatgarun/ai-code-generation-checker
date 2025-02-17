@@ -22,7 +22,7 @@ async function predictCode() {
     predictButton.disabled = true;
 
     try {
-        const response = await fetch('/predict', {
+        const response = await fetch('https://7bd6-34-66-43-152.ngrok-free.app/predict', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ code: codeSnippet })
